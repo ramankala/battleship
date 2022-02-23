@@ -15,9 +15,9 @@ test('Testing ship length to verify it is as expected', () => {
 test('Testing position on ship is marked as hit', () => {
     expect(shipFactory(4).hit(2)).toBe('hit');
 });
-test.skip('Testing function to check whether ship is sunk', () => {
+test('Testing function to check whether ship is sunk', () => {
     expect(shipFactory(4).isSunk()).toBe(true);
 });
-test.skip('Testing function to check whether ship is sunk', () => {
+test('Testing function to check whether ship is sunk', () => {
     expect(shipFactory(5).isSunk()).toBe(false);
 });
