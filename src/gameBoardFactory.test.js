@@ -1,6 +1,6 @@
 import { gameBoardFactory } from './gameBoardFactory';
 
-test.skip('Test the gameboard has the right number of cells', () => {
+test('Test the gameboard has the right number of cells', () => {
     expect(gameBoardFactory().board()).toBe(100);
 });
 test.skip('Testing that gameboard places ships are correct coordinates', () => {
