@@ -38,26 +38,27 @@ const gameBoardFactory = () => {
         if (gameBoard[x][y].hasShip === true){
             return 'Hit';
         } else {
-            return 'Miss';
+            gameBoard[x][y].isShot = true;
+            return gameBoard;
         }
     };
 
-    const viewShip = (x, y, shipLength) => {
-        placeShip(x, y, shipLength);
-        for (let i = 0; i < x; i++){
-            for (let j = y; j < y + shipLength; j++){
-                return gameBoard.hasShip;
-            };
-        };
-    };
+    const allShipsSunk = (arr) => {
+        const sunkenShips = arr.filter(ships => ships.isSunk());
+        if (sunkenShips.length === arr.length){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 
     return {
         gameBoard,
         board,
         placeShip,
         receiveAttack,
-        viewShip,
-        
+        allShipsSunk,
     }
 };
 
