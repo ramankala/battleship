@@ -34,7 +34,7 @@ const gameBoardFactory = () => {
     }
 
     const receiveAttack = (x, y) => {
-        placeShip(x, y, 4);
+        placeShip(2, 2, 4);
         if (gameBoard[x][y].hasShip === true){
             return 'Hit';
         } else {
