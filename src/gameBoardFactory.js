@@ -13,19 +13,15 @@ const gameBoardFactory = () => {
         (["", "", "", "", "", "", "", "", "", ""]),
         (["", "", "", "", "", "", "", "", "", ""]),
     ];
-    const board = () => {
-        for (let i = 0; i < 10; i++){
-            for (let j = 0; j < 10; j++){
-                gameBoard[i][j] = ({hasShip: false, isShot: false});
-            };
+    for (let i = 0; i < 10; i++){
+        for (let j = 0; j < 10; j++){
+            gameBoard[i][j] = ({hasShip: false, isShot: false});
         };
-        return gameBoard;
     };
 
 
     const placeShip = (x, y, shipLength) => {
         // should be calling ship factory here
-        board();
         for (let i = 0; i < shipLength; i++){
             gameBoard[x][y].hasShip = true;
             y += 1;
@@ -55,7 +51,6 @@ const gameBoardFactory = () => {
 
     return {
         gameBoard,
-        board,
         placeShip,
         receiveAttack,
         allShipsSunk,
