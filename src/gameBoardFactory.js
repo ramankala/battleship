@@ -21,7 +21,6 @@ const gameBoardFactory = () => {
 
 
     const placeShip = (x, y, shipLength) => {
-        // should be calling ship factory here
         for (let i = 0; i < shipLength; i++){
             gameBoard[x][y].hasShip = true;
             y += 1;
@@ -30,8 +29,8 @@ const gameBoardFactory = () => {
     }
 
     const receiveAttack = (x, y) => {
-        placeShip(2, 2, 4);
         if (gameBoard[x][y].hasShip === true){
+            gameBoard[x][y].isShot = true;
             return 'Hit';
         } else {
             gameBoard[x][y].isShot = true;
