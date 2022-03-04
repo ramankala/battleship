@@ -27,14 +27,8 @@ const game = () => {
     console.log(playerArr[1].board.gameBoard);
     renderGBoard(playerArr[1].board.gameBoard, 2);
 
-    atkListener(playerArr[0].board, playerArr[0].ships, 1);
-    atkListener(playerArr[1].board, playerArr[1].ships, 2);
-
-    //if atklistener returns true, hit the right ship
-    //need to figure out how to hit the right ship in the back-end
-
-
-
+    atkListener(playerArr[0], playerArr[1], 1);
+    atkListener(playerArr[1], playerArr[0], 2);
 
 };
 
