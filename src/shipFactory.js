@@ -23,6 +23,7 @@ const shipFactory = (length) => {
     };
 
     return {
+        ship,
         length,
         hit,
         isSunk,

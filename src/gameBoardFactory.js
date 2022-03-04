@@ -15,14 +15,16 @@ const gameBoardFactory = () => {
     ];
     for (let i = 0; i < 10; i++){
         for (let j = 0; j < 10; j++){
-            gameBoard[i][j] = ({hasShip: false, isShot: false});
+            gameBoard[i][j] = ({hasShip: false, isShot: false, shipLength: 0, shipType: 'n/a'});
         };
     };
 
 
-    const placeShip = (x, y, shipLength) => {
+    const placeShip = (x, y, shipLength, shipType) => {
         for (let i = 0; i < shipLength; i++){
             gameBoard[x][y].hasShip = true;
+            gameBoard[x][y].shipLength = shipLength;
+            gameBoard[x][y].shipType = shipType;
             y += 1;
         }
         return gameBoard;

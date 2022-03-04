@@ -29,6 +29,8 @@ const renderGBoard = (gameBoard, player) => {
             squareDiv.setAttribute('data-y-coord', index);
             squareDiv.setAttribute('data-x-coord', subindex);
             squareDiv.setAttribute('data-has-ship', subitem.hasShip);
+            squareDiv.setAttribute('data-ship-length', subitem.shipLength);
+            squareDiv.setAttribute('data-ship-type', subitem.shipType);
             squareDiv.classList.add(`atkDiv${player}`);
             squareDiv.textContent = subitem.hasShip;
             for (let i = 0; i < 10; i++){
@@ -68,21 +70,59 @@ const renderGBoard = (gameBoard, player) => {
     });
 };
 
-const atkListener = (gameBoard, player) => {
+const atkListener = (gameBoard, ships, player) => {
     let response = document.getElementsByClassName(`atkDiv${player}`);
+    let yPoint;
+    let xPoint;
+    let shipLength;
+    let shipType;
+    let pos5 = 0;
+    let pos4 = 0;
+    let pos3 = 0;
+    let pos2 = 0;
+    let pos1 = 0;
 
     for (let i = 0; i < response.length; i++){
         response[i].addEventListener('click', function(e) {
-            let yPoint = e.target.getAttribute('data-y-coord');
-            let xPoint = e.target.getAttribute('data-y-coord');
+            yPoint = e.target.getAttribute('data-y-coord');
+            xPoint = e.target.getAttribute('data-y-coord');
+            shipLength = e.target.getAttribute('data-ship-length');
+            shipType = e.target.getAttribute('data-ship-type');
             
             if (e.target.getAttribute('data-has-ship') === 'true'){
                 e.target.style.backgroundColor = 'red';
             } else {
                 e.target.style.backgroundColor = 'grey';
             }
-            console.log(e.target.getAttribute('data-has-ship'));
             gameBoard.receiveAttack(xPoint, yPoint);
+
+            if (shipType == 'Carrier') {
+                
+                let hitShip = ships.filter(ship => ship.length == shipLength);
+                hitShip[0].hit(pos5);
+                pos5 += 1;
+            } else if (shipType == 'Battleship') {
+                
+                let hitShip = ships.filter(ship => ship.length == shipLength);
+                hitShip[0].hit(pos4);
+                pos4 += 1;
+            } else if (shipType == 'Destroyer') {
+                
+                let hitShip = ships.filter(ship => ship.length == shipLength);
+                hitShip[0].hit(pos3);
+                 pos3 += 1;
+            } else if (shipType == 'Submarine') {
+                
+                let hitShip = ships.filter(ship => ship.length == shipLength);
+                hitShip[1].hit(pos2);
+                pos2 += 1;
+            } else if (shipType == 'Patrolboat') {
+                
+                let hitShip = ships.filter(ship => ship.length == shipLength);
+                hitShip[0].hit(pos1);
+                pos1 += 1;
+            }
+
         });
     };
 };
