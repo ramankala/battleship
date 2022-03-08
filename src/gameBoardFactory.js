@@ -15,7 +15,7 @@ const gameBoardFactory = () => {
     ];
     for (let i = 0; i < 10; i++){
         for (let j = 0; j < 10; j++){
-            gameBoard[i][j] = ({hasShip: false, isShot: false, shipLength: 0, shipType: 'n/a'});
+            gameBoard[i][j] = ({hasShip: false, isShot: false, shipLength: 0, shipType: 'n/a', xPoint: 0, yPoint: 0});
         };
     };
 
@@ -25,6 +25,8 @@ const gameBoardFactory = () => {
             gameBoard[x][y].hasShip = true;
             gameBoard[x][y].shipLength = shipLength;
             gameBoard[x][y].shipType = shipType;
+            gameBoard[x][y].xPoint = x;
+            gameBoard[x][y].yPoint = y;
             y += 1;
         }
         return gameBoard;

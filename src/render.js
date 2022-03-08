@@ -1,4 +1,3 @@
-
 const renderGBoard = (gameBoard, num) => {
     let container = document.querySelector(`#container${num}`);
     let row1 = document.createElement('div');
@@ -31,31 +30,33 @@ const renderGBoard = (gameBoard, num) => {
             squareDiv.setAttribute('data-has-ship', subitem.hasShip);
             squareDiv.setAttribute('data-ship-length', subitem.shipLength);
             squareDiv.setAttribute('data-ship-type', subitem.shipType);
+            squareDiv.setAttribute('data-is-shot', subitem.isShot);
             squareDiv.classList.add(`atkDiv${num}`);
             squareDiv.textContent = subitem.hasShip;
             for (let i = 0; i < 10; i++){
-                if (squareDiv.getAttribute('id') === `squareDiv0${i}`){
+                if (squareDiv.getAttribute('id') == `squareDiv0${i}`){
                     row1.appendChild(squareDiv);
-                } else if (squareDiv.getAttribute('id') === `squareDiv1${i}`){
+                } else if (squareDiv.getAttribute('id') == `squareDiv1${i}`){
                     row2.appendChild(squareDiv);
-                } else if (squareDiv.getAttribute('id') === `squareDiv2${i}`){
+                } else if (squareDiv.getAttribute('id') == `squareDiv2${i}`){
                     row3.appendChild(squareDiv);
-                } else if (squareDiv.getAttribute('id') === `squareDiv3${i}`){
+                } else if (squareDiv.getAttribute('id') == `squareDiv3${i}`){
                     row4.appendChild(squareDiv);
-                } else if (squareDiv.getAttribute('id') === `squareDiv4${i}`){
+                } else if (squareDiv.getAttribute('id') == `squareDiv4${i}`){
                     row5.appendChild(squareDiv);
-                } else if (squareDiv.getAttribute('id') === `squareDiv5${i}`){
+                } else if (squareDiv.getAttribute('id') == `squareDiv5${i}`){
                     row6.appendChild(squareDiv);
-                } else if (squareDiv.getAttribute('id') === `squareDiv6${i}`){
+                } else if (squareDiv.getAttribute('id') == `squareDiv6${i}`){
                     row7.appendChild(squareDiv);
-                } else if (squareDiv.getAttribute('id') === `squareDiv7${i}`){
+                } else if (squareDiv.getAttribute('id') == `squareDiv7${i}`){
                     row8.appendChild(squareDiv);
-                } else if (squareDiv.getAttribute('id') === `squareDiv8${i}`){
+                } else if (squareDiv.getAttribute('id') == `squareDiv8${i}`){
                     row9.appendChild(squareDiv);
-                } else if (squareDiv.getAttribute('id') === `squareDiv9${i}`){
+                } else if (squareDiv.getAttribute('id') == `squareDiv9${i}`){
                     row10.appendChild(squareDiv);
                 }
             };
+
             container.appendChild(row1);
             container.appendChild(row2);
             container.appendChild(row3);
@@ -74,6 +75,7 @@ const atkListener = (player, enemy, num) => {
     let gameBoard = player.board;
     let ships = player.ships;
     let response = document.getElementsByClassName(`atkDiv${num}`);
+    let isShot;
     let yPoint;
     let xPoint;
     let shipLength;
@@ -87,10 +89,12 @@ const atkListener = (player, enemy, num) => {
     for (let i = 0; i < response.length; i++){
         response[i].addEventListener('click', function(e) {
             if (player.isActive === true) {
+                isShot = e.target.getAttribute('data-is-shot');
+                console.log(isShot);
                 yPoint = e.target.getAttribute('data-y-coord');
                 xPoint = e.target.getAttribute('data-y-coord');
-                shipLength = e.target.getAttribute('data-ship-length');
-                shipType = e.target.getAttribute('data-ship-type');
+                shipLength = gameBoard.gameBoard[xPoint][yPoint].shipLength;
+                shipType = gameBoard.gameBoard[xPoint][yPoint].shipType;
                 
                 if (e.target.getAttribute('data-has-ship') === 'true'){
                     e.target.style.backgroundColor = 'red';
@@ -127,6 +131,7 @@ const atkListener = (player, enemy, num) => {
                 }
                 player.toggle();
                 enemy.toggle();
+                console.log(gameBoard.gameBoard[xPoint][yPoint]);
             } else {
 
             }
