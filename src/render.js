@@ -90,7 +90,6 @@ const atkListener = (player, enemy, num) => {
                 yPoint = e.target.getAttribute('data-y-coord');
                 xPoint = e.target.getAttribute('data-y-coord');
                 isShot = gameBoard.gameBoard[xPoint][yPoint].isShot;
-                console.log(isShot);
                 shipLength = gameBoard.gameBoard[xPoint][yPoint].shipLength;
                 shipType = gameBoard.gameBoard[xPoint][yPoint].shipType;
 
@@ -130,7 +129,10 @@ const atkListener = (player, enemy, num) => {
                     }
                     player.toggle();
                     enemy.toggle();
-                    console.log(gameBoard.gameBoard[xPoint][yPoint]);
+                    let coordinates = player.enemyMove();
+                    // console.log(coordinates);
+                    enemyAttack(enemy, player, coordinates[0], coordinates[1]);
+                    // console.log(gameBoard.gameBoard[xPoint][yPoint]);
                 } else {
                     // Do nothing
                 }
@@ -140,6 +142,67 @@ const atkListener = (player, enemy, num) => {
         });
     };
 };
+
+const enemyAttack = (player, enemy, x, y) => {
+    let gameBoard = player.board;
+    let ships = player.ships;
+    let isShot = gameBoard.gameBoard[x][y].isShot;;
+    let hasShip = gameBoard.gameBoard[x][y].hasShip;
+    let shipLength = gameBoard.gameBoard[x][y].shipLength;
+    let shipType = gameBoard.gameBoard[x][y].shipType;
+    let panel = '' + x + y;
+    let squareDiv = document.getElementsByClassName('atkDiv2')[panel];  
+    let pos5 = 0;
+    let pos4 = 0;
+    let pos3 = 0;
+    let pos2 = 0;
+    let pos1 = 0;
+
+    if (player.isActive === true) {
+
+        if (isShot === false) {
+            if (hasShip === 'true'){
+                squareDiv.style.backgroundColor = 'red';
+            } else {
+                squareDiv.style.backgroundColor = 'grey';
+            }
+            gameBoard.receiveAttack(x, y);
+
+            if (shipType == 'Carrier') {
+                
+                let hitShip = ships.filter(ship => ship.length == shipLength);
+                hitShip[0].hit(pos5);
+                pos5 += 1;
+            } else if (shipType == 'Battleship') {
+                
+                let hitShip = ships.filter(ship => ship.length == shipLength);
+                hitShip[0].hit(pos4);
+                pos4 += 1;
+            } else if (shipType == 'Destroyer') {
+                
+                let hitShip = ships.filter(ship => ship.length == shipLength);
+                hitShip[0].hit(pos3);
+                    pos3 += 1;
+            } else if (shipType == 'Submarine') {
+                
+                let hitShip = ships.filter(ship => ship.length == shipLength);
+                hitShip[1].hit(pos2);
+                pos2 += 1;
+            } else if (shipType == 'Patrolboat') {
+                
+                let hitShip = ships.filter(ship => ship.length == shipLength);
+                hitShip[0].hit(pos1);
+                pos1 += 1;
+            }
+            player.toggle();
+            enemy.toggle();
+        } else {
+            // Do nothing
+        }
+    } else {
+        // Do nothing
+    }
+}
 
 export { 
 

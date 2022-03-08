@@ -18,12 +18,20 @@ const Player = (name, isActive = false) => {
 
     let ships = [carrier, battleship, destroyer, submarine, patrolBoat];
 
+    const enemyMove = () => {
+        let x = Math.floor((Math.random() * 10));
+        let y = Math.floor((Math.random() * 10));
+
+        return [x, y];
+    }
+
     return {
         get name(){return state.name;},
         get isActive(){return state.isActive;},
         toggle(){ state.isActive = !state.isActive;},
         board,
         ships,
+        enemyMove,
     }
 };
 

@@ -28,9 +28,7 @@ const game = () => {
     renderGBoard(playerArr[1].board.gameBoard, 2);
 
     atkListener(playerArr[0], playerArr[1], 1);
-    atkListener(playerArr[1], playerArr[0], 2);
-
-    //Need to implement logic which doesn't allow a player to reselect a square they have already clicked on
+    // atkListener(playerArr[1], playerArr[0], 2);
 
 };
 

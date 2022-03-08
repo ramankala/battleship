@@ -35,9 +35,11 @@ const gameBoardFactory = () => {
     const receiveAttack = (x, y) => {
         if (gameBoard[x][y].hasShip === true){
             gameBoard[x][y].isShot = true;
+            console.log(gameBoard);
             return 'Hit';
         } else {
             gameBoard[x][y].isShot = true;
+            console.log(gameBoard);
             return gameBoard;
         }
     };
