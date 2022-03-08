@@ -6,38 +6,44 @@ html, body {
 #gameContainer{
     display: flex;
     justify-content: space-around;
+    margin-top: 50px;
 }
 #container1, #container2{
     display: flex;
+    flex-direction: column;
+}
+#row1, #row2, #row3, #row4, #row5, #row6, #row7, #row8, #row9, #row10{
+    display: flex;
 }
 #squareDiv00, #squareDiv01, #squareDiv02, #squareDiv03, #squareDiv04, #squareDiv05, #squareDiv06, 
-#squareDiv07, #squareDiv08, #squareDiv09{
-    border: 2px solid black;
-    border-bottom: 0;
-    padding: 10px;
-}
-#squareDiv10, #squareDiv11, #squareDiv12, #squareDiv13, #squareDiv14, #squareDiv15, #squareDiv16, #squareDiv17,
-#squareDiv18, #squareDiv20, #squareDiv21, #squareDiv22, #squareDiv23, #squareDiv24, #squareDiv25, #squareDiv26,
-#squareDiv27, #squareDiv28, #squareDiv30, #squareDiv31, #squareDiv32, #squareDiv33, #squareDiv34, #squareDiv35,
-#squareDiv36, #squareDiv37, #squareDiv38, #squareDiv40, #squareDiv41, #squareDiv42, #squareDiv43, #squareDiv44,
-#squareDiv45, #squareDiv46, #squareDiv47, #squareDiv48, #squareDiv50, #squareDiv51, #squareDiv52, #squareDiv53,
-#squareDiv54, #squareDiv55, #squareDiv56, #squareDiv57, #squareDiv58, #squareDiv60, #squareDiv61, #squareDiv62,
-#squareDiv63, #squareDiv64, #squareDiv65, #squareDiv66, #squareDiv67, #squareDiv68, #squareDiv70, #squareDiv71,
-#squareDiv72, #squareDiv73, #squareDiv74, #squareDiv75, #squareDiv76, #squareDiv77, #squareDiv78, #squareDiv80,
-#squareDiv81, #squareDiv82, #squareDiv83, #squareDiv84, #squareDiv85, #squareDiv86, #squareDiv87, #squareDiv88,
+#squareDiv07, #squareDiv08, #squareDiv09, #squareDiv10, #squareDiv11, #squareDiv12, #squareDiv13, #squareDiv14, #squareDiv15, #squareDiv16, #squareDiv17,
+#squareDiv18, #squareDiv19, #squareDiv20, #squareDiv21, #squareDiv22, #squareDiv23, #squareDiv24, #squareDiv25, #squareDiv26,
+#squareDiv27, #squareDiv28, #squareDiv29, #squareDiv30, #squareDiv31, #squareDiv32, #squareDiv33, #squareDiv34, #squareDiv35,
+#squareDiv36, #squareDiv37, #squareDiv38, #squareDiv39, #squareDiv40, #squareDiv41, #squareDiv42, #squareDiv43, #squareDiv44,
+#squareDiv45, #squareDiv46, #squareDiv47, #squareDiv48, #squareDiv49, #squareDiv50, #squareDiv51, #squareDiv52, #squareDiv53,
+#squareDiv54, #squareDiv55, #squareDiv56, #squareDiv57, #squareDiv58, #squareDiv59, #squareDiv60, #squareDiv61, #squareDiv62,
+#squareDiv63, #squareDiv64, #squareDiv65, #squareDiv66, #squareDiv67, #squareDiv68, #squareDiv69, #squareDiv70, #squareDiv71,
+#squareDiv72, #squareDiv73, #squareDiv74, #squareDiv75, #squareDiv76, #squareDiv77, #squareDiv78, #squareDiv79, #squareDiv80,
+#squareDiv81, #squareDiv82, #squareDiv83, #squareDiv84, #squareDiv85, #squareDiv86, #squareDiv87, #squareDiv88, #squareDiv89,
 #squareDiv90, #squareDiv91, #squareDiv92, #squareDiv93, #squareDiv94, #squareDiv95, #squareDiv96, #squareDiv97,
-#squareDiv98{
-    border: 2px solid black;
-    border-bottom: 0;
-    border-left: 0;
-    padding: 10px;
-}
-#squareDiv19, #squareDiv29, #squareDiv39, #squareDiv49, #squareDiv59, #squareDiv69, #squareDiv79, #squareDiv89,
-#squareDiv99{
+#squareDiv98, #squareDiv99{
     border: 2px solid black;
     padding: 10px;
-    border-left: 0;
+    flex: 1;
 }
-#squareDiv09{
-    border: 2px solid black;
+#squareDiv00, #squareDiv01, #squareDiv02, #squareDiv03, #squareDiv04, #squareDiv05, #squareDiv06, #squareDiv07, #squareDiv08,
+#squareDiv09 {
+    border-top: 4px solid black;
+}
+#squareDiv09, #squareDiv19, #squareDiv29, #squareDiv39, #squareDiv49, #squareDiv59, #squareDiv69, #squareDiv79,
+#squareDiv89, #squareDiv99{
+    border-right: 4px solid black;
+}
+#squareDiv90, #squareDiv91, #squareDiv92, #squareDiv93, #squareDiv94, #squareDiv95, #squareDiv96, #squareDiv97,
+#squareDiv98, #squareDiv99{
+    border-bottom: 4px solid black;
+}
+#squareDiv00, #squareDiv10, #squareDiv20, #squareDiv30, #squareDiv40, #squareDiv50, #squareDiv60, #squareDiv70,
+#squareDiv80, #squareDiv90{
+    border-left: 4px solid black;
 }
