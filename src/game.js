@@ -27,8 +27,14 @@ const game = () => {
     console.log(playerArr[1].board.gameBoard);
     renderGBoard(playerArr[1].board.gameBoard, 2);
 
-    atkListener(playerArr[0], playerArr[1], 1);
+    atkListener(playerArr[0], playerArr[1], 2);
     // atkListener(playerArr[1], playerArr[0], 2);
+
+    // if (playerArr[0].board.allShipsSunk(playerArr[0].ships) === true) {
+    //     console.log('Player won!');
+    // } else if (playerArr[1].board.allShipsSunk(playerArr[1].ships) === true) {
+    //     console.log('Computer won!');
+    // };
 
 };
 

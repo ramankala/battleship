@@ -70,8 +70,8 @@ const renderGBoard = (gameBoard, num) => {
 };
 
 const atkListener = (player, enemy, num) => {
-    let gameBoard = player.board;
-    let ships = player.ships;
+    let gameBoard = enemy.board;
+    let ships = enemy.ships;
     let response = document.getElementsByClassName(`atkDiv${num}`);
     let isShot;
     let yPoint;
@@ -133,11 +133,10 @@ const atkListener = (player, enemy, num) => {
                     enemy.toggle();
                     let coordinates = player.enemyMove();
                     console.log(coordinates);
-                    enemyAttack(enemy, player, coordinates[0], coordinates[1]);
+                    enemyAttack(player, enemy, coordinates[0], coordinates[1]);
                     // console.log(gameBoard.gameBoard[xPoint][yPoint]);
                 } else {
                     // Do nothing
-                    console.log(isShot);
                 }
             } else {
                 // Do nothing
@@ -148,6 +147,7 @@ const atkListener = (player, enemy, num) => {
 
 const enemyAttack = (player, enemy, x, y) => {
     let gameBoard = player.board;
+    console.log(gameBoard);
     let ships = player.ships;
     let isShot = gameBoard.gameBoard[x][y].isShot;;
     let hasShip = gameBoard.gameBoard[x][y].hasShip;
@@ -159,14 +159,14 @@ const enemyAttack = (player, enemy, x, y) => {
     } else {
         panel = '' + x + y;
     }
-    let squareDiv = document.getElementsByClassName('atkDiv2')[panel];  
+    let squareDiv = document.getElementsByClassName('atkDiv1')[panel];  
     let pos5 = 0;
     let pos4 = 0;
     let pos3 = 0;
     let pos2 = 0;
     let pos1 = 0;
 
-    if (player.isActive === true) {
+    if (enemy.isActive === true) {
 
         if (isShot === false) {
             if (hasShip === true){
