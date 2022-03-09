@@ -30,12 +30,6 @@ const game = () => {
     atkListener(playerArr[0], playerArr[1], 2);
     // atkListener(playerArr[1], playerArr[0], 2);
 
-    // if (playerArr[0].board.allShipsSunk(playerArr[0].ships) === true) {
-    //     console.log('Player won!');
-    // } else if (playerArr[1].board.allShipsSunk(playerArr[1].ships) === true) {
-    //     console.log('Computer won!');
-    // };
-
 };
 
 export { game };

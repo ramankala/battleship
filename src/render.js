@@ -25,8 +25,8 @@ const renderGBoard = (gameBoard, num) => {
         item.forEach(function(subitem, subindex) {
             let squareDiv = document.createElement('div');
             squareDiv.setAttribute('id', `squareDiv${index}${subindex}`);
-            squareDiv.setAttribute('data-y-coord', index);
-            squareDiv.setAttribute('data-x-coord', subindex);
+            squareDiv.setAttribute('data-y-coord', subindex);
+            squareDiv.setAttribute('data-x-coord', index);
             squareDiv.setAttribute('data-has-ship', subitem.hasShip);
             squareDiv.setAttribute('data-is-shot', subitem.isShot);
             squareDiv.classList.add(`atkDiv${num}`);
@@ -86,6 +86,7 @@ const atkListener = (player, enemy, num) => {
 
     for (let i = 0; i < response.length; i++){
         response[i].addEventListener('click', function(e) {
+
             if (player.isActive === true) {
                 yPoint = e.target.getAttribute('data-y-coord');
                 xPoint = e.target.getAttribute('data-x-coord');
@@ -102,6 +103,14 @@ const atkListener = (player, enemy, num) => {
                     console.log(xPoint);
                     console.log(yPoint);
                     gameBoard.receiveAttack(xPoint, yPoint);
+
+                    if (gameBoard.allShipsSunk(ships) === true) {
+                        console.log('Player won!');
+                        return;
+                    } else if (player.board.allShipsSunk(player.ships) === true) {
+                        console.log('Computer won!');
+                        return;
+                    }
         
                     if (shipType == 'Carrier') {
                         
@@ -147,7 +156,6 @@ const atkListener = (player, enemy, num) => {
 
 const enemyAttack = (player, enemy, x, y) => {
     let gameBoard = player.board;
-    console.log(gameBoard);
     let ships = player.ships;
     let isShot = gameBoard.gameBoard[x][y].isShot;;
     let hasShip = gameBoard.gameBoard[x][y].hasShip;
@@ -175,6 +183,14 @@ const enemyAttack = (player, enemy, x, y) => {
                 squareDiv.style.backgroundColor = 'grey';
             }
             gameBoard.receiveAttack(x, y);
+            
+            if (gameBoard.allShipsSunk(ships) === true) {
+                console.log('Computer won!');
+                return;
+            } else if (enemy.board.allShipsSunk(enemy.ships) === true) {
+                console.log('User won!');
+                return;
+            };
 
             if (shipType == 'Carrier') {
                 
@@ -204,16 +220,15 @@ const enemyAttack = (player, enemy, x, y) => {
             }
             player.toggle();
             enemy.toggle();
-            console.log(enemy);
         } else {
             let coordinates = player.enemyMove();
-            console.log(coordinates);
+            // console.log(coordinates);
             enemyAttack(player, enemy, coordinates[0], coordinates[1]);
         }
     } else {
         // Do nothing
-    }
-}
+    };
+};
 
 export { 
 
