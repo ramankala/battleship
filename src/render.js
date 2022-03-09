@@ -88,7 +88,7 @@ const atkListener = (player, enemy, num) => {
         response[i].addEventListener('click', function(e) {
             if (player.isActive === true) {
                 yPoint = e.target.getAttribute('data-y-coord');
-                xPoint = e.target.getAttribute('data-y-coord');
+                xPoint = e.target.getAttribute('data-x-coord');
                 isShot = gameBoard.gameBoard[xPoint][yPoint].isShot;
                 shipLength = gameBoard.gameBoard[xPoint][yPoint].shipLength;
                 shipType = gameBoard.gameBoard[xPoint][yPoint].shipType;
@@ -99,6 +99,8 @@ const atkListener = (player, enemy, num) => {
                     } else {
                         e.target.style.backgroundColor = 'grey';
                     }
+                    console.log(xPoint);
+                    console.log(yPoint);
                     gameBoard.receiveAttack(xPoint, yPoint);
         
                     if (shipType == 'Carrier') {
@@ -130,11 +132,12 @@ const atkListener = (player, enemy, num) => {
                     player.toggle();
                     enemy.toggle();
                     let coordinates = player.enemyMove();
-                    // console.log(coordinates);
+                    console.log(coordinates);
                     enemyAttack(enemy, player, coordinates[0], coordinates[1]);
                     // console.log(gameBoard.gameBoard[xPoint][yPoint]);
                 } else {
                     // Do nothing
+                    console.log(isShot);
                 }
             } else {
                 // Do nothing
@@ -150,7 +153,12 @@ const enemyAttack = (player, enemy, x, y) => {
     let hasShip = gameBoard.gameBoard[x][y].hasShip;
     let shipLength = gameBoard.gameBoard[x][y].shipLength;
     let shipType = gameBoard.gameBoard[x][y].shipType;
-    let panel = '' + x + y;
+    let panel;
+    if (x === 0){
+        panel = y;
+    } else {
+        panel = '' + x + y;
+    }
     let squareDiv = document.getElementsByClassName('atkDiv2')[panel];  
     let pos5 = 0;
     let pos4 = 0;
@@ -161,7 +169,7 @@ const enemyAttack = (player, enemy, x, y) => {
     if (player.isActive === true) {
 
         if (isShot === false) {
-            if (hasShip === 'true'){
+            if (hasShip === true){
                 squareDiv.style.backgroundColor = 'red';
             } else {
                 squareDiv.style.backgroundColor = 'grey';
@@ -196,8 +204,11 @@ const enemyAttack = (player, enemy, x, y) => {
             }
             player.toggle();
             enemy.toggle();
+            console.log(enemy);
         } else {
-            // Do nothing
+            let coordinates = player.enemyMove();
+            console.log(coordinates);
+            enemyAttack(player, enemy, coordinates[0], coordinates[1]);
         }
     } else {
         // Do nothing
