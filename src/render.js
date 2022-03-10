@@ -237,27 +237,52 @@ const placePieces = (player) => {
     }
     const onDrop = (e) => {
         e.preventDefault();
-        e.target.style.backgroundColor = 'green';
         console.log(e.target.getAttribute('data-y-coord'));
         console.log(e.target.getAttribute('data-x-coord'));
         let x = e.target.getAttribute('data-x-coord');
         let y = e.target.getAttribute('data-y-coord');
+        // e.target.style.backgroundColor = 'green';
         let data = e.dataTransfer.getData('text');
         console.log(player);
         if (data === 'Carrier'){
             player.placeShip(parseInt(x), parseInt(y), 5, data);
+            for (let i = 0; i < 5; i++){
+                let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                squareDiv.style.backgroundColor = 'green';
+                y++;
+            }
         }
         if (data === 'Battleship'){
             player.placeShip(parseInt(x), parseInt(y), 4, data);
+            for (let i = 0; i < 4; i++){
+                let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                squareDiv.style.backgroundColor = 'green';
+                y++;
+            }
         }
         if (data === 'Destroyer'){
             player.placeShip(parseInt(x), parseInt(y), 3, data);
+            for (let i = 0; i < 3; i++){
+                let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                squareDiv.style.backgroundColor = 'green';
+                y++;
+            }
         }
         if (data === 'Submarine'){
             player.placeShip(parseInt(x), parseInt(y), 3, data);
+            for (let i = 0; i < 2; i++){
+                let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                squareDiv.style.backgroundColor = 'green';
+                y++;
+            }
         }
         if (data === 'PatrolBoat'){
             player.placeShip(parseInt(x), parseInt(y), 2, data);
+            for (let i = 0; i < 2; i++){
+                let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                squareDiv.style.backgroundColor = 'green';
+                y++;
+            }
         }
     }
     let response = document.getElementsByClassName('atkDiv1');
