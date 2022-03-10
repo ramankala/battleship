@@ -47,3 +47,26 @@ html, body {
 #squareDiv80, #squareDiv90{
     border-left: 4px solid black;
 }
+#shipPiecesZone{
+    display: flex;
+    flex: 1;
+    gap: 20px;
+    margin-top: 20px;
+}
+#Carrier, #Battleship, #Destroyer, #Submarine, #PatrolBoat{
+    display: flex;
+    border: 2px solid black;
+    width: auto;
+    height: auto;
+    
+}
+
+#item{
+    padding: 20px;
+    border: 2px solid black;
+    flex: 1;
+    width: 10px;
+}
+#startBtn{
+    border: 2px solid black;
+}

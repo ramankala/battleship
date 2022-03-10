@@ -23,10 +23,15 @@ const gameBoardFactory = () => {
     const placeShip = (x, y, shipLength, shipType) => {
         for (let i = 0; i < shipLength; i++){
             gameBoard[x][y].hasShip = true;
+            console.log('hasShip works');
             gameBoard[x][y].shipLength = shipLength;
+            console.log('shipLength works');
             gameBoard[x][y].shipType = shipType;
+            console.log('shipType works');
             gameBoard[x][y].xPoint = x;
+            console.log('xPoint works');
             gameBoard[x][y].yPoint = y;
+            console.log('yPoint works');
             y += 1;
         }
         return gameBoard;

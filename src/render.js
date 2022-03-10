@@ -230,8 +230,56 @@ const enemyAttack = (player, enemy, x, y) => {
     };
 };
 
+const placePieces = (player) => {
+
+    const onDragOver = (e) => {
+        e.preventDefault();
+    }
+    const onDrop = (e) => {
+        e.preventDefault();
+        e.target.style.backgroundColor = 'green';
+        console.log(e.target.getAttribute('data-y-coord'));
+        console.log(e.target.getAttribute('data-x-coord'));
+        let x = e.target.getAttribute('data-x-coord');
+        let y = e.target.getAttribute('data-y-coord');
+        let data = e.dataTransfer.getData('text');
+        console.log(player);
+        if (data === 'Carrier'){
+            player.placeShip(parseInt(x), parseInt(y), 5, data);
+        }
+        if (data === 'Battleship'){
+            player.placeShip(parseInt(x), parseInt(y), 4, data);
+        }
+        if (data === 'Destroyer'){
+            player.placeShip(parseInt(x), parseInt(y), 3, data);
+        }
+        if (data === 'Submarine'){
+            player.placeShip(parseInt(x), parseInt(y), 3, data);
+        }
+        if (data === 'PatrolBoat'){
+            player.placeShip(parseInt(x), parseInt(y), 2, data);
+        }
+    }
+    let response = document.getElementsByClassName('atkDiv1');
+
+    for (let i = 0; i < response.length; i++){
+        response[i].addEventListener('dragover', onDragOver);
+        response[i].addEventListener('drop', onDrop);
+    };
+
+}
+
+const deRender = () => {
+    let parent = document.querySelector("#container1");
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 export { 
 
     renderGBoard,
     atkListener,
+    placePieces,
+    deRender,
  };

@@ -1,7 +1,30 @@
 import { Player } from './playerFactory';
-import { renderGBoard, atkListener } from './render';
+import { renderGBoard, atkListener, placePieces, deRender } from './render';
 
 const game = () => {
+
+    const startBtn = document.querySelector('#startBtn');
+
+    // let data;
+    // let carrierX;
+    // let carrierY;
+
+    const onDragStart = (e) => {
+        e.dataTransfer.setData('text/plain', e.target.id);
+        e.currentTarget.style.backgroundColor = 'green';
+    }
+    
+
+    const carrierDrag = document.querySelector('#Carrier');
+    carrierDrag.addEventListener('dragstart', onDragStart);
+    const battleDrag = document.querySelector('#Battleship');
+    battleDrag.addEventListener('dragstart', onDragStart);
+    const destrDrag = document.querySelector('#Destroyer');
+    destrDrag.addEventListener('dragstart', onDragStart);
+    const subDrag = document.querySelector('#Submarine');
+    subDrag.addEventListener('dragstart', onDragStart);
+    const patrolDrag = document.querySelector('#PatrolBoat');
+    patrolDrag.addEventListener('dragstart', onDragStart);
 
     //create player and computer player
     //populate gameboards for both players
@@ -11,24 +34,17 @@ const game = () => {
         Player("computer", false)
     ];
 
-    playerArr[0].board.placeShip(2, 2, 5, 'Carrier');
-    playerArr[0].board.placeShip(8, 0, 4, 'Battleship');
-    playerArr[0].board.placeShip(6, 7, 3, 'Destroyer');
-    playerArr[0].board.placeShip(5, 1, 3, 'Submarine');
-    playerArr[0].board.placeShip(1, 7, 2, 'Patrolboat');
-    console.log(playerArr[0].board.gameBoard);
     renderGBoard(playerArr[0].board.gameBoard, 1);
+    placePieces(playerArr[0].board);
 
-    playerArr[1].board.placeShip(8, 1, 5, 'Carrier');
-    playerArr[1].board.placeShip(3, 5, 4, 'Battleship');
-    playerArr[1].board.placeShip(6, 3, 3, 'Destroyer');
-    playerArr[1].board.placeShip(1, 1, 3, 'Submarine');
-    playerArr[1].board.placeShip(0, 6, 2, 'Patrolboat');
-    console.log(playerArr[1].board.gameBoard);
-    renderGBoard(playerArr[1].board.gameBoard, 2);
-
-    atkListener(playerArr[0], playerArr[1], 2);
-    // atkListener(playerArr[1], playerArr[0], 2);
+    startBtn.addEventListener('click', function(){
+        deRender();
+        // console.log(playerArr[0].board.gameBoard);
+        renderGBoard(playerArr[0].board.gameBoard, 1);
+        renderGBoard(playerArr[1].board.gameBoard, 2);
+        atkListener(playerArr[0], playerArr[1], 2);
+        atkListener(playerArr[1], playerArr[0], 2);
+    });
 
 };
 
