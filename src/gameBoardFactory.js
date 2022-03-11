@@ -43,6 +43,29 @@ const gameBoardFactory = () => {
         return gameBoard;
     }
 
+    const scout = (x, y, shipLength, alignment) => {
+        let report = false;
+        if (alignment === 'row'){
+            for (let i = 0; i < shipLength; i++){
+                let analysis = gameBoard[x][y].hasShip;
+                if ( analysis === true ){
+                    report = true; 
+                }
+                y += 1;
+            }
+        }
+        else {
+            for (let i = 0; i < shipLength; i++){
+                let analysis = gameBoard[x][y].hasShip;
+                if (analysis === true){
+                    report = true; 
+                }
+                x += 1;
+            }
+        }
+        return report;
+    }
+
     const receiveAttack = (x, y) => {
         if (gameBoard[x][y].hasShip === true){
             gameBoard[x][y].isShot = true;
@@ -69,6 +92,7 @@ const gameBoardFactory = () => {
         placeVert,
         receiveAttack,
         allShipsSunk,
+        scout,
     }
 };
 

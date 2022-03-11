@@ -251,97 +251,108 @@ const placePieces = (player) => {
         let align = carrier.getAttribute('data-alignment');
         console.log(player);
         if (data === 'Carrier'){
-            console.log(align);
-            if (align === 'row'){
-                player.placeHorizontal(x, y, 5, data);
-                for (let i = 0; i < 5; i++){
-                    let squareDiv = document.getElementById(`squareDiv${x}${y}`);
-                    squareDiv.style.backgroundColor = 'green';
-                    y++;
+            if (player.scout(x, y, 5, align) === false){
+                if (align === 'row'){
+                    player.placeHorizontal(x, y, 5, data);
+                    for (let i = 0; i < 5; i++){
+                        let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                        squareDiv.style.backgroundColor = 'green';
+                        y++;
+                    }
+                } else if (align === 'column') {
+                    player.placeVert(x, y, 5, data);
+                    for (let i = 0; i < 5; i++){
+                        let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                        squareDiv.style.backgroundColor = 'green';
+                        x++;
+                    }
                 }
-            } else if (align === 'column') {
-                player.placeVert(x, y, 5, data);
-                for (let i = 0; i < 5; i++){
-                    let squareDiv = document.getElementById(`squareDiv${x}${y}`);
-                    squareDiv.style.backgroundColor = 'green';
-                    x++;
-                }
+                carrier.style.display = 'none';
             }
-            carrier.style.display = 'none';
-            // hide the ship pieces after placing them
+            else {
+                
+            }
 
         }
         if (data === 'Battleship'){
-            if (align === 'row'){
-                player.placeHorizontal(x, y, 4, data);
-                for (let i = 0; i < 4; i++){
-                    let squareDiv = document.getElementById(`squareDiv${x}${y}`);
-                    squareDiv.style.backgroundColor = 'green';
-                    y++;
+            if (player.scout(x, y, 4, align) === false){
+                if (align === 'row'){
+                    player.placeHorizontal(x, y, 4, data);
+                    for (let i = 0; i < 4; i++){
+                        let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                        squareDiv.style.backgroundColor = 'green';
+                        y++;
+                    }
+                } else if (align === 'column') {
+                    player.placeVert(x, y, 4, data);
+                    for (let i = 0; i < 4; i++){
+                        let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                        squareDiv.style.backgroundColor = 'green';
+                        x++;
+                    }
                 }
-            } else if (align === 'column') {
-                player.placeVert(x, y, 4, data);
-                for (let i = 0; i < 4; i++){
-                    let squareDiv = document.getElementById(`squareDiv${x}${y}`);
-                    squareDiv.style.backgroundColor = 'green';
-                    x++;
-                }
+                battleShip.style.display = 'none';
             }
-            battleShip.style.display = 'none';
         }
         if (data === 'Destroyer'){
-            if (align === 'row'){
-                player.placeHorizontal(x, y, 3, data);
-                for (let i = 0; i < 3; i++){
-                    let squareDiv = document.getElementById(`squareDiv${x}${y}`);
-                    squareDiv.style.backgroundColor = 'green';
-                    y++;
+            if (player.scout(x, y, 3, align) === false){
+                if (align === 'row'){
+                    player.placeHorizontal(x, y, 3, data);
+                    for (let i = 0; i < 3; i++){
+                        let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                        squareDiv.style.backgroundColor = 'green';
+                        y++;
+                    }
+                } else if (align === 'column') {
+                    player.placeVert(x, y, 3, data);
+                    for (let i = 0; i < 3; i++){
+                        let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                        squareDiv.style.backgroundColor = 'green';
+                        x++;
+                    }
                 }
-            } else if (align === 'column') {
-                player.placeVert(x, y, 3, data);
-                for (let i = 0; i < 3; i++){
-                    let squareDiv = document.getElementById(`squareDiv${x}${y}`);
-                    squareDiv.style.backgroundColor = 'green';
-                    x++;
-                }
+                destroyer.style.display = 'none';
             }
-            destroyer.style.display = 'none';
         }
         if (data === 'Submarine'){
-            if (align === 'row'){
-                player.placeHorizontal(x, y, 3, data);
-                for (let i = 0; i < 3; i++){
-                    let squareDiv = document.getElementById(`squareDiv${x}${y}`);
-                    squareDiv.style.backgroundColor = 'green';
-                    y++;
+            if (player.scout(x, y, 3, align) === false){
+                if (align === 'row'){
+                    player.placeHorizontal(x, y, 3, data);
+                    for (let i = 0; i < 3; i++){
+                        let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                        squareDiv.style.backgroundColor = 'green';
+                        y++;
+                    }
+                } else if (align === 'column') {
+                    player.placeVert(x, y, 3, data);
+                    for (let i = 0; i < 3; i++){
+                        let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                        squareDiv.style.backgroundColor = 'green';
+                        x++;
+                    }
                 }
-            } else if (align === 'column') {
-                player.placeVert(x, y, 3, data);
-                for (let i = 0; i < 3; i++){
-                    let squareDiv = document.getElementById(`squareDiv${x}${y}`);
-                    squareDiv.style.backgroundColor = 'green';
-                    x++;
-                }
+                subMarine.style.display = 'none';
             }
-            subMarine.style.display = 'none';
         }
         if (data === 'PatrolBoat'){
-            if (align === 'row'){
-                player.placeHorizontal(x, y, 2, data);
-                for (let i = 0; i < 2; i++){
-                    let squareDiv = document.getElementById(`squareDiv${x}${y}`);
-                    squareDiv.style.backgroundColor = 'green';
-                    y++;
+            if (player.scout(x, y, 2, align) === false){
+                if (align === 'row'){
+                    player.placeHorizontal(x, y, 2, data);
+                    for (let i = 0; i < 2; i++){
+                        let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                        squareDiv.style.backgroundColor = 'green';
+                        y++;
+                    }
+                } else if (align === 'column') {
+                    player.placeVert(x, y, 2, data);
+                    for (let i = 0; i < 2; i++){
+                        let squareDiv = document.getElementById(`squareDiv${x}${y}`);
+                        squareDiv.style.backgroundColor = 'green';
+                        x++;
+                    }
                 }
-            } else if (align === 'column') {
-                player.placeVert(x, y, 2, data);
-                for (let i = 0; i < 2; i++){
-                    let squareDiv = document.getElementById(`squareDiv${x}${y}`);
-                    squareDiv.style.backgroundColor = 'green';
-                    x++;
-                }
+                patrolB.style.display = 'none';
             }
-            patrolB.style.display = 'none';
         }
     }
     let response = document.getElementsByClassName('atkDiv1');
