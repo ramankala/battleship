@@ -57,17 +57,17 @@ const game = () => {
 
     placePieces(playerArr[0].board);
 
-    //create player and computer player
-    //populate gameboards for both players
-    // placePieces(playerArr[0].board, align);
-
     startBtn.addEventListener('click', function(){
         deRender();
         // console.log(playerArr[0].board.gameBoard);
         renderGBoard(playerArr[0].board.gameBoard, 1);
+        playerArr[1].board.placeHorizontal(8, 1, 5, 'Carrier');
+        playerArr[1].board.placeHorizontal(3, 5, 4, 'Battleship');
+        playerArr[1].board.placeHorizontal(6, 3, 3, 'Destroyer');
+        playerArr[1].board.placeHorizontal(1, 1, 3, 'Submarine');
+        playerArr[1].board.placeHorizontal(0, 6, 2, 'Patrolboat');
         renderGBoard(playerArr[1].board.gameBoard, 2);
         atkListener(playerArr[0], playerArr[1], 2);
-        atkListener(playerArr[1], playerArr[0], 2);
     });
 
 };
