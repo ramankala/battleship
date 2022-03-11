@@ -243,7 +243,12 @@ const placePieces = (player) => {
         let y = parseInt(e.target.getAttribute('data-y-coord'));
         // e.target.style.backgroundColor = 'green';
         let data = e.dataTransfer.getData('text');
-        let align = document.querySelector('#Carrier').getAttribute('data-alignment');
+        let carrier = document.querySelector('#Carrier');
+        let battleShip = document.querySelector('#Battleship');
+        let destroyer = document.querySelector('#Destroyer');
+        let subMarine = document.querySelector('#Submarine');
+        let patrolB = document.querySelector('#PatrolBoat');
+        let align = carrier.getAttribute('data-alignment');
         console.log(player);
         if (data === 'Carrier'){
             console.log(align);
@@ -262,6 +267,8 @@ const placePieces = (player) => {
                     x++;
                 }
             }
+            carrier.style.display = 'none';
+            // hide the ship pieces after placing them
 
         }
         if (data === 'Battleship'){
@@ -280,6 +287,7 @@ const placePieces = (player) => {
                     x++;
                 }
             }
+            battleShip.style.display = 'none';
         }
         if (data === 'Destroyer'){
             if (align === 'row'){
@@ -297,6 +305,7 @@ const placePieces = (player) => {
                     x++;
                 }
             }
+            destroyer.style.display = 'none';
         }
         if (data === 'Submarine'){
             if (align === 'row'){
@@ -314,6 +323,7 @@ const placePieces = (player) => {
                     x++;
                 }
             }
+            subMarine.style.display = 'none';
         }
         if (data === 'PatrolBoat'){
             if (align === 'row'){
@@ -331,6 +341,7 @@ const placePieces = (player) => {
                     x++;
                 }
             }
+            patrolB.style.display = 'none';
         }
     }
     let response = document.getElementsByClassName('atkDiv1');
