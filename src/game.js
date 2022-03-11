@@ -4,38 +4,62 @@ import { renderGBoard, atkListener, placePieces, deRender } from './render';
 const game = () => {
 
     const startBtn = document.querySelector('#startBtn');
-
-    // let data;
-    // let carrierX;
-    // let carrierY;
-
-    const onDragStart = (e) => {
-        e.dataTransfer.setData('text/plain', e.target.id);
-        e.currentTarget.style.backgroundColor = 'green';
-    }
-    
-
+    const alignBtn = document.querySelector('#alignBtn');
     const carrierDrag = document.querySelector('#Carrier');
-    carrierDrag.addEventListener('dragstart', onDragStart);
     const battleDrag = document.querySelector('#Battleship');
-    battleDrag.addEventListener('dragstart', onDragStart);
     const destrDrag = document.querySelector('#Destroyer');
-    destrDrag.addEventListener('dragstart', onDragStart);
     const subDrag = document.querySelector('#Submarine');
-    subDrag.addEventListener('dragstart', onDragStart);
     const patrolDrag = document.querySelector('#PatrolBoat');
-    patrolDrag.addEventListener('dragstart', onDragStart);
-
-    //create player and computer player
-    //populate gameboards for both players
+    carrierDrag.classList.add('horizontal');
+    battleDrag.classList.add('horizontal');
+    destrDrag.classList.add('horizontal');
+    subDrag.classList.add('horizontal');
+    patrolDrag.classList.add('horizontal');
+    carrierDrag.style.flexDirection = 'row';
+    carrierDrag.setAttribute('data-alignment', 'row');
 
     const playerArr = [
         Player("player1", true),
         Player("computer", false)
     ];
 
+    const onDragStart = (e) => {
+        e.dataTransfer.setData('text/plain', e.target.id);
+        e.currentTarget.style.backgroundColor = 'green';
+    }
+
+    carrierDrag.addEventListener('dragstart', onDragStart);
+    battleDrag.addEventListener('dragstart', onDragStart);
+    destrDrag.addEventListener('dragstart', onDragStart);
+    subDrag.addEventListener('dragstart', onDragStart);
+    patrolDrag.addEventListener('dragstart', onDragStart);
+
     renderGBoard(playerArr[0].board.gameBoard, 1);
+
+    alignBtn.addEventListener('click', function(){
+        if (carrierDrag.style.flexDirection === 'row'){
+            carrierDrag.style.flexDirection = 'column';
+            battleDrag.style.flexDirection = 'column';
+            destrDrag.style.flexDirection = 'column';
+            subDrag.style.flexDirection = 'column';
+            patrolDrag.style.flexDirection = 'column';
+            carrierDrag.setAttribute('data-alignment', 'column');
+        } else {
+            carrierDrag.style.flexDirection = 'row';
+            battleDrag.style.flexDirection = 'row';
+            destrDrag.style.flexDirection = 'row';
+            subDrag.style.flexDirection = 'row';
+            patrolDrag.style.flexDirection = 'row';
+            carrierDrag.setAttribute('data-alignment', 'row');
+        }
+
+    })
+
     placePieces(playerArr[0].board);
+
+    //create player and computer player
+    //populate gameboards for both players
+    // placePieces(playerArr[0].board, align);
 
     startBtn.addEventListener('click', function(){
         deRender();
