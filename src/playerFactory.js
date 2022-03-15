@@ -24,6 +24,11 @@ const Player = (name, isActive = false) => {
 
         return [x, y];
     }
+    let pos5 = 0;
+    let pos4 = 0;
+    let pos3 = 0;
+    let pos2 = 0;
+    let pos1 = 0;
 
     return {
         get name(){return state.name;},
@@ -32,6 +37,11 @@ const Player = (name, isActive = false) => {
         board,
         ships,
         enemyMove,
+        pos5,
+        pos4,
+        pos3,
+        pos2,
+        pos1,
     }
 };
 

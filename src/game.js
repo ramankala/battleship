@@ -9,7 +9,7 @@ const game = () => {
     const battleDrag = document.querySelector('#Battleship');
     const destrDrag = document.querySelector('#Destroyer');
     const subDrag = document.querySelector('#Submarine');
-    const patrolDrag = document.querySelector('#PatrolBoat');
+    const patrolDrag = document.querySelector('#Patrolboat');
     carrierDrag.classList.add('horizontal');
     battleDrag.classList.add('horizontal');
     destrDrag.classList.add('horizontal');

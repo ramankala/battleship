@@ -78,11 +78,6 @@ const atkListener = (player, enemy, num) => {
     let xPoint;
     let shipLength;
     let shipType;
-    let pos5 = 0;
-    let pos4 = 0;
-    let pos3 = 0;
-    let pos2 = 0;
-    let pos1 = 0;
 
     for (let i = 0; i < response.length; i++){
         response[i].addEventListener('click', function(e) {
@@ -103,40 +98,43 @@ const atkListener = (player, enemy, num) => {
                     console.log(xPoint);
                     console.log(yPoint);
                     gameBoard.receiveAttack(xPoint, yPoint);
-
-                    if (gameBoard.allShipsSunk(ships) === true) {
-                        console.log('Player won!');
-                        return;
-                    } else if (player.board.allShipsSunk(player.ships) === true) {
-                        console.log('Computer won!');
-                        return;
-                    }
         
                     if (shipType == 'Carrier') {
                         
                         let hitShip = ships.filter(ship => ship.length == shipLength);
-                        hitShip[0].hit(pos5);
-                        pos5 += 1;
+                        console.log(hitShip);
+                        hitShip[0].hit(enemy.pos5);
+                        enemy.pos5 += 1;
                     } else if (shipType == 'Battleship') {
                         
                         let hitShip = ships.filter(ship => ship.length == shipLength);
-                        hitShip[0].hit(pos4);
-                        pos4 += 1;
+                        hitShip[0].hit(enemy.pos4);
+                        enemy.pos4 += 1;
                     } else if (shipType == 'Destroyer') {
                         
                         let hitShip = ships.filter(ship => ship.length == shipLength);
-                        hitShip[0].hit(pos3);
-                         pos3 += 1;
+                        hitShip[0].hit(enemy.pos3);
+                        enemy.pos3 += 1;
                     } else if (shipType == 'Submarine') {
                         
                         let hitShip = ships.filter(ship => ship.length == shipLength);
-                        hitShip[1].hit(pos2);
-                        pos2 += 1;
+                        hitShip[1].hit(enemy.pos2);
+                        enemy.pos2 += 1;
                     } else if (shipType == 'Patrolboat') {
                         
                         let hitShip = ships.filter(ship => ship.length == shipLength);
-                        hitShip[0].hit(pos1);
-                        pos1 += 1;
+                        hitShip[0].hit(enemy.pos1);
+                        enemy.pos1 += 1;
+                    }
+                    if (gameBoard.allShipsSunk(ships) === true) {
+                        console.log('Player won!');
+                        player.toggle();
+                        return;
+                    }
+                    if (player.board.allShipsSunk(player.ships) === true) {
+                        console.log('Computer won!');
+                        enemy.toggle();
+                        return;
                     }
                     player.toggle();
                     enemy.toggle();
@@ -156,6 +154,7 @@ const atkListener = (player, enemy, num) => {
 
 const enemyAttack = (player, enemy, x, y) => {
     let gameBoard = player.board;
+    console.log(gameBoard);
     let ships = player.ships;
     let isShot = gameBoard.gameBoard[x][y].isShot;;
     let hasShip = gameBoard.gameBoard[x][y].hasShip;
@@ -168,11 +167,7 @@ const enemyAttack = (player, enemy, x, y) => {
         panel = '' + x + y;
     }
     let squareDiv = document.getElementsByClassName('atkDiv1')[panel];  
-    let pos5 = 0;
-    let pos4 = 0;
-    let pos3 = 0;
-    let pos2 = 0;
-    let pos1 = 0;
+
 
     if (enemy.isActive === true) {
 
@@ -183,41 +178,41 @@ const enemyAttack = (player, enemy, x, y) => {
                 squareDiv.style.backgroundColor = 'grey';
             }
             gameBoard.receiveAttack(x, y);
-            
-            if (gameBoard.allShipsSunk(ships) === true) {
-                console.log('Computer won!');
-                return;
-            } else if (enemy.board.allShipsSunk(enemy.ships) === true) {
-                console.log('User won!');
-                return;
-            };
 
             if (shipType == 'Carrier') {
                 
                 let hitShip = ships.filter(ship => ship.length == shipLength);
-                hitShip[0].hit(pos5);
-                pos5 += 1;
+                hitShip[0].hit(player.pos5);
+                player.pos5 += 1;
             } else if (shipType == 'Battleship') {
                 
                 let hitShip = ships.filter(ship => ship.length == shipLength);
-                hitShip[0].hit(pos4);
-                pos4 += 1;
+                hitShip[0].hit(player.pos4);
+                player.pos4 += 1;
             } else if (shipType == 'Destroyer') {
                 
                 let hitShip = ships.filter(ship => ship.length == shipLength);
-                hitShip[0].hit(pos3);
-                    pos3 += 1;
+                hitShip[0].hit(player.pos3);
+                player.pos3 += 1;
             } else if (shipType == 'Submarine') {
                 
                 let hitShip = ships.filter(ship => ship.length == shipLength);
-                hitShip[1].hit(pos2);
-                pos2 += 1;
+                hitShip[1].hit(player.pos2);
+                player.pos2 += 1;
             } else if (shipType == 'Patrolboat') {
                 
                 let hitShip = ships.filter(ship => ship.length == shipLength);
-                hitShip[0].hit(pos1);
-                pos1 += 1;
+                hitShip[0].hit(player.pos1);
+                player.pos1 += 1;
             }
+            if (gameBoard.allShipsSunk(ships) === true) {
+                console.log('Computer won!');
+                return;
+            }
+            if (enemy.board.allShipsSunk(enemy.ships) === true) {
+                console.log('User won!');
+                return;
+            };
             player.toggle();
             enemy.toggle();
         } else {
@@ -247,7 +242,7 @@ const placePieces = (player) => {
         let battleShip = document.querySelector('#Battleship');
         let destroyer = document.querySelector('#Destroyer');
         let subMarine = document.querySelector('#Submarine');
-        let patrolB = document.querySelector('#PatrolBoat');
+        let patrolB = document.querySelector('#Patrolboat');
         let align = carrier.getAttribute('data-alignment');
         console.log(player);
         if (data === 'Carrier'){
@@ -334,7 +329,7 @@ const placePieces = (player) => {
                 subMarine.style.display = 'none';
             }
         }
-        if (data === 'PatrolBoat'){
+        if (data === 'Patrolboat'){
             if (player.scout(x, y, 2, align) === false){
                 if (align === 'row'){
                     player.placeHorizontal(x, y, 2, data);
