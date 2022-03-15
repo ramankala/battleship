@@ -97,7 +97,7 @@ const atkListener = (player, enemy, num) => {
                     }
                     console.log(xPoint);
                     console.log(yPoint);
-                    gameBoard.receiveAttack(xPoint, yPoint);
+                    let message = gameBoard.receiveAttack(xPoint, yPoint);
         
                     if (shipType == 'Carrier') {
                         
@@ -136,8 +136,10 @@ const atkListener = (player, enemy, num) => {
                         enemy.toggle();
                         return;
                     }
-                    player.toggle();
-                    enemy.toggle();
+                    if (message !== 'Hit'){
+                        player.toggle();
+                        enemy.toggle();
+                    }
                     let coordinates = player.enemyMove();
                     console.log(coordinates);
                     enemyAttack(player, enemy, coordinates[0], coordinates[1]);
@@ -177,7 +179,7 @@ const enemyAttack = (player, enemy, x, y) => {
             } else {
                 squareDiv.style.backgroundColor = 'grey';
             }
-            gameBoard.receiveAttack(x, y);
+            let message = gameBoard.receiveAttack(x, y);
 
             if (shipType == 'Carrier') {
                 
@@ -213,8 +215,37 @@ const enemyAttack = (player, enemy, x, y) => {
                 console.log('User won!');
                 return;
             };
-            player.toggle();
-            enemy.toggle();
+
+            if (message !== 'Hit'){
+                player.toggle();
+                enemy.toggle();
+            }
+            else {
+                switch(Math.floor(Math.random() * 2) + 1){
+                    case 1: 
+                        if ((y + 1) < 10) {
+                            enemyAttack(player, enemy, x, y + 1);
+                        }
+                        else if ((x + 1) < 10) {
+                            enemyAttack(player, enemy, x + 1, y);
+                        }
+                        else {
+                            enemyAttack(player, enemy, x - 1, y);
+                        }
+                    case 2: 
+                        if ((x + 1) < 10){
+                            enemyAttack(player, enemy, x + 1, y);
+                        }
+                        else if ((y + 1) < 10) {
+                            enemyAttack(player, enemy, x, y + 1);
+                        }
+                        else {
+                            enemyAttack(player, enemy, x, y - 1);
+                        }
+                }
+                
+            }
+
         } else {
             let coordinates = player.enemyMove();
             // console.log(coordinates);
