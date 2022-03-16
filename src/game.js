@@ -70,7 +70,7 @@ const game = () => {
         playerArr[1].board.placeHorizontal(1, 1, 3, 'Submarine');
         playerArr[1].board.placeHorizontal(0, 6, 2, 'Patrolboat');
         renderGBoard(playerArr[1].board.gameBoard, 2);
-        gameContainer.style.gap = '10%';
+        gameContainer.style.gap = '17%';
         container2.style.display = 'flex';
         gamerTag.style.gap = '10%';
         computerTag.style.display = 'flex';
