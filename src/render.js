@@ -128,11 +128,13 @@ const atkListener = (player, enemy, num) => {
                     }
                     if (gameBoard.allShipsSunk(ships) === true) {
                         console.log('Player won!');
+                        winMsg('Player');
                         player.toggle();
                         return;
                     }
                     if (player.board.allShipsSunk(player.ships) === true) {
                         console.log('Computer won!');
+                        winMsg('Computer');
                         enemy.toggle();
                         return;
                     }
@@ -209,10 +211,12 @@ const enemyAttack = (player, enemy, x, y) => {
             }
             if (gameBoard.allShipsSunk(ships) === true) {
                 console.log('Computer won!');
+                winMsg('Computer');
                 return;
             }
             if (enemy.board.allShipsSunk(enemy.ships) === true) {
                 console.log('User won!');
+                winMsg('User');
                 return;
             };
 
@@ -222,6 +226,8 @@ const enemyAttack = (player, enemy, x, y) => {
             }
             else {
                 switch(Math.floor(Math.random() * 2) + 1){
+                    //If hit lands, attack adjacent right tile, unless there's no right tile, then strike
+                    //bottom tile, unless there's no bottom tile, then strike tile above
                     case 1: 
                         if ((y + 1) < 10) {
                             enemyAttack(player, enemy, x, y + 1);
@@ -232,6 +238,8 @@ const enemyAttack = (player, enemy, x, y) => {
                         else {
                             enemyAttack(player, enemy, x - 1, y);
                         }
+                    //If hit lands, attack adjacent bottom tile, unless there's no bottom tile, then strike
+                    //adjacent tile to right, unless there's no tile to right, then strike tile to left
                     case 2: 
                         if ((x + 1) < 10){
                             enemyAttack(player, enemy, x + 1, y);
@@ -395,6 +403,19 @@ const deRender = () => {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
+}
+
+const winMsg = (string) => {
+    const gameContainer = document.querySelector('#gameContainer');
+    const winnerDiv = document.createElement('div');
+    if (string === 'Player') {
+        winnerDiv.textContent = 'You are the winner!';
+    }
+    else if (string === 'Computer') {
+        winnerDiv.textContent = 'Computer is the winner!';
+    }
+
+    gameContainer.appendChild(winnerDiv);
 }
 
 export { 

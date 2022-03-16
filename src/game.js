@@ -58,6 +58,8 @@ const game = () => {
     placePieces(playerArr[0].board);
 
     startBtn.addEventListener('click', function(){
+        const gameContainer = document.querySelector('#gameContainer');
+        const container2 = document.querySelector('#container2');
         deRender();
         // console.log(playerArr[0].board.gameBoard);
         renderGBoard(playerArr[0].board.gameBoard, 1);
