@@ -2,15 +2,32 @@ html, body {
     height: 100%;
     width: 100%;
     margin: 0;
+    background-color: rgb(211, 200, 200);
+}
+#title{
+    display: flex;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: 700;
 }
 #gameContainer{
     display: flex;
-    justify-content: space-around;
-    margin-top: 50px;
+    justify-content: center;
+    padding: 2%;
 }
 #container1, #container2{
     display: flex;
     flex-direction: column;
+}
+#container1{
+    
+}
+#container2{
+    display: none;
+}
+#shipPiecesZone{
+    display: flex;
+    justify-content: center;
 }
 #row1, #row2, #row3, #row4, #row5, #row6, #row7, #row8, #row9, #row10{
     display: flex;
@@ -27,30 +44,31 @@ html, body {
 #squareDiv81, #squareDiv82, #squareDiv83, #squareDiv84, #squareDiv85, #squareDiv86, #squareDiv87, #squareDiv88, #squareDiv89,
 #squareDiv90, #squareDiv91, #squareDiv92, #squareDiv93, #squareDiv94, #squareDiv95, #squareDiv96, #squareDiv97,
 #squareDiv98, #squareDiv99{
-    border: 2px solid black;
-    padding: 10px;
+    border: 1px solid white;
+    background-color: rgb(179, 196, 250);
+    padding: 6px;
     flex: 1;
 }
 #squareDiv00, #squareDiv01, #squareDiv02, #squareDiv03, #squareDiv04, #squareDiv05, #squareDiv06, #squareDiv07, #squareDiv08,
 #squareDiv09 {
-    border-top: 4px solid black;
+    border-top: 2px solid white;
 }
 #squareDiv09, #squareDiv19, #squareDiv29, #squareDiv39, #squareDiv49, #squareDiv59, #squareDiv69, #squareDiv79,
 #squareDiv89, #squareDiv99{
-    border-right: 4px solid black;
+    border-right: 2px solid white;
 }
 #squareDiv90, #squareDiv91, #squareDiv92, #squareDiv93, #squareDiv94, #squareDiv95, #squareDiv96, #squareDiv97,
 #squareDiv98, #squareDiv99{
-    border-bottom: 4px solid black;
+    border-bottom: 2px solid white;
 }
 #squareDiv00, #squareDiv10, #squareDiv20, #squareDiv30, #squareDiv40, #squareDiv50, #squareDiv60, #squareDiv70,
 #squareDiv80, #squareDiv90{
-    border-left: 4px solid black;
+    border-left: 2px solid white;
 }
 #shipPiecesZone{
     display: flex;
     flex: 1;
-    gap: 20px;
+    gap: 5%;
     margin-top: 20px;
 }
 /* #Carrier, #Battleship, #Destroyer, #Submarine, #PatrolBoat{
@@ -69,14 +87,59 @@ html, body {
 }
 
 #item{
-    padding: 20px;
-    border: 2px solid black;
+    padding: 15px;
+    border: 1px solid black;
     flex: 1;
-    width: 10px;
+    width: 12px;
+
+}
+#btnContainer{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    gap: 10%;
+    padding: 5%;
 }
 #startBtn{
-    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    border: 2px solid rgb(157, 165, 40);
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: 540;
+    background-color: rgb(234, 247, 62);
+    padding: 0.7%;
 }
 #alignBtn{
-    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    border: 2px solid rgb(143, 78, 24);
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: 540;
+    background-color: rgb(250, 129, 29);
+    padding: 0.7%;
 }
+#gamerTag{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    padding: 2%;
+}
+#playerTag{
+    display: flex;
+    justify-content: center;
+    border: 2px solid rgb(47, 118, 211);
+    background-color:rgb(80, 135, 206) ;
+    color: rgb(252, 252, 252);
+    font-size: 175%;
+    font-weight: 670;
+    border-radius: 8px;
+    padding: 2%;
+    width: 20%;
+
+}
+#computerTag{
+    display: none;
+}
+
