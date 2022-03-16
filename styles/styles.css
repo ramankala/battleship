@@ -141,5 +141,14 @@ html, body {
 }
 #computerTag{
     display: none;
+    justify-content: center;
+    border: 2px solid rgb(211, 47, 47);
+    background-color:rgb(206, 80, 80);
+    color: rgb(252, 252, 252);
+    font-size: 175%;
+    font-weight: 670;
+    border-radius: 8px;
+    padding: 2%;
+    width: 20%;
 }
 
