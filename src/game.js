@@ -60,6 +60,8 @@ const game = () => {
     startBtn.addEventListener('click', function(){
         const gameContainer = document.querySelector('#gameContainer');
         const container2 = document.querySelector('#container2');
+        const gamerTag = document.querySelector('#gamerTag');
+        const computerTag = document.querySelector('#computerTag');
         deRender();
         // console.log(playerArr[0].board.gameBoard);
         renderGBoard(playerArr[0].board.gameBoard, 1);
@@ -69,6 +71,12 @@ const game = () => {
         playerArr[1].board.placeHorizontal(1, 1, 3, 'Submarine');
         playerArr[1].board.placeHorizontal(0, 6, 2, 'Patrolboat');
         renderGBoard(playerArr[1].board.gameBoard, 2);
+        gameContainer.style.gap = '10%';
+        container2.style.display = 'flex';
+        gamerTag.style.gap = '10%';
+        computerTag.style.display = 'flex';
+        startBtn.style.display = 'none';
+        alignBtn.style.display = 'none';
         atkListener(playerArr[0], playerArr[1], 2);
     });
 
