@@ -55,7 +55,7 @@ const game = () => {
 
     })
 
-    placePieces(playerArr[0].board);
+    placePieces(playerArr[0]);
 
     startBtn.addEventListener('click', function(){
         const gameContainer = document.querySelector('#gameContainer');
@@ -63,7 +63,6 @@ const game = () => {
         const gamerTag = document.querySelector('#gamerTag');
         const computerTag = document.querySelector('#computerTag');
         deRender();
-        // console.log(playerArr[0].board.gameBoard);
         renderGBoard(playerArr[0].board.gameBoard, 1);
         playerArr[1].board.placeHorizontal(8, 1, 5, 'Carrier');
         playerArr[1].board.placeHorizontal(3, 5, 4, 'Battleship');

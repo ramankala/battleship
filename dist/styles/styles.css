@@ -7,8 +7,10 @@ html, body {
 #title{
     display: flex;
     justify-content: center;
+    padding: 2%;
     font-size: 48px;
     font-weight: 700;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 #gameContainer{
     display: flex;
@@ -46,7 +48,7 @@ html, body {
 #squareDiv98, #squareDiv99{
     border: 1px solid white;
     background-color: rgb(179, 196, 250);
-    padding: 6px;
+    padding: 15px;
     flex: 1;
 }
 #squareDiv00, #squareDiv01, #squareDiv02, #squareDiv03, #squareDiv04, #squareDiv05, #squareDiv06, #squareDiv07, #squareDiv08,
@@ -90,8 +92,8 @@ html, body {
     padding: 15px;
     border: 1px solid black;
     flex: 1;
-    width: 12px;
-
+    width: auto;
+    height: auto;
 }
 #btnContainer{
     display: flex;
@@ -101,7 +103,7 @@ html, body {
     padding: 5%;
 }
 #startBtn{
-    display: flex;
+    display: none;
     justify-content: center;
     border: 2px solid rgb(157, 165, 40);
     border-radius: 8px;
@@ -134,6 +136,7 @@ html, body {
     color: rgb(252, 252, 252);
     font-size: 175%;
     font-weight: 670;
+    font-family: helvetica;
     border-radius: 8px;
     padding: 2%;
     width: 20%;
@@ -147,8 +150,16 @@ html, body {
     color: rgb(252, 252, 252);
     font-size: 175%;
     font-weight: 670;
+    font-family: helvetica;
     border-radius: 8px;
     padding: 2%;
     width: 20%;
 }
-
+#winContainer{
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 550;
+    font-family: helvetica;
+    color: rgb(139, 148, 17);
+}

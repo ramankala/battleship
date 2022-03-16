@@ -29,6 +29,13 @@ const Player = (name, isActive = false) => {
     let pos3 = 0;
     let pos2 = 0;
     let pos1 = 0;
+    let flag1 = false;
+    let flag2 = false;
+    let flag3 = false;
+    let flag4 = false;
+    let flag5 = false;
+
+    let flag = [flag1, flag2, flag3, flag4, flag5];
 
     return {
         get name(){return state.name;},
@@ -42,6 +49,7 @@ const Player = (name, isActive = false) => {
         pos3,
         pos2,
         pos1,
+        flag,
     }
 };
 

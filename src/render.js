@@ -30,7 +30,13 @@ const renderGBoard = (gameBoard, num) => {
             squareDiv.setAttribute('data-has-ship', subitem.hasShip);
             squareDiv.setAttribute('data-is-shot', subitem.isShot);
             squareDiv.classList.add(`atkDiv${num}`);
-            squareDiv.textContent = subitem.hasShip;
+            if (subitem.hasShip === false && num === 1){
+                squareDiv.style.backgroundColor = 'rgb(179, 196, 250)';
+            }
+            else if (subitem.hasShip === true && num === 1) {
+                squareDiv.style.backgroundColor = 'green';
+            }
+            // squareDiv.textContent = '';
             for (let i = 0; i < 10; i++){
                 if (squareDiv.getAttribute('id') == `squareDiv0${i}`){
                     row1.appendChild(squareDiv);
@@ -95,14 +101,11 @@ const atkListener = (player, enemy, num) => {
                     } else {
                         e.target.style.backgroundColor = 'grey';
                     }
-                    console.log(xPoint);
-                    console.log(yPoint);
                     let message = gameBoard.receiveAttack(xPoint, yPoint);
         
                     if (shipType == 'Carrier') {
                         
                         let hitShip = ships.filter(ship => ship.length == shipLength);
-                        console.log(hitShip);
                         hitShip[0].hit(enemy.pos5);
                         enemy.pos5 += 1;
                     } else if (shipType == 'Battleship') {
@@ -127,13 +130,11 @@ const atkListener = (player, enemy, num) => {
                         enemy.pos1 += 1;
                     }
                     if (gameBoard.allShipsSunk(ships) === true) {
-                        console.log('Player won!');
                         winMsg('Player');
                         player.toggle();
                         return;
                     }
                     if (player.board.allShipsSunk(player.ships) === true) {
-                        console.log('Computer won!');
                         winMsg('Computer');
                         enemy.toggle();
                         return;
@@ -143,9 +144,7 @@ const atkListener = (player, enemy, num) => {
                         enemy.toggle();
                     }
                     let coordinates = player.enemyMove();
-                    console.log(coordinates);
                     enemyAttack(player, enemy, coordinates[0], coordinates[1]);
-                    // console.log(gameBoard.gameBoard[xPoint][yPoint]);
                 } else {
                     // Do nothing
                 }
@@ -158,7 +157,6 @@ const atkListener = (player, enemy, num) => {
 
 const enemyAttack = (player, enemy, x, y) => {
     let gameBoard = player.board;
-    console.log(gameBoard);
     let ships = player.ships;
     let isShot = gameBoard.gameBoard[x][y].isShot;;
     let hasShip = gameBoard.gameBoard[x][y].hasShip;
@@ -210,12 +208,10 @@ const enemyAttack = (player, enemy, x, y) => {
                 player.pos1 += 1;
             }
             if (gameBoard.allShipsSunk(ships) === true) {
-                console.log('Computer won!');
                 winMsg('Computer');
                 return;
             }
             if (enemy.board.allShipsSunk(enemy.ships) === true) {
-                console.log('User won!');
                 winMsg('User');
                 return;
             };
@@ -256,7 +252,6 @@ const enemyAttack = (player, enemy, x, y) => {
 
         } else {
             let coordinates = player.enemyMove();
-            // console.log(coordinates);
             enemyAttack(player, enemy, coordinates[0], coordinates[1]);
         }
     } else {
@@ -264,18 +259,16 @@ const enemyAttack = (player, enemy, x, y) => {
     };
 };
 
-const placePieces = (player) => {
+const placePieces = (user) => {
+    let player = user.board;
 
     const onDragOver = (e) => {
         e.preventDefault();
     }
     const onDrop = (e) => {
         e.preventDefault();
-        console.log(e.target.getAttribute('data-y-coord'));
-        console.log(e.target.getAttribute('data-x-coord'));
         let x = parseInt(e.target.getAttribute('data-x-coord'));
         let y = parseInt(e.target.getAttribute('data-y-coord'));
-        // e.target.style.backgroundColor = 'green';
         let data = e.dataTransfer.getData('text');
         let carrier = document.querySelector('#Carrier');
         let battleShip = document.querySelector('#Battleship');
@@ -283,9 +276,9 @@ const placePieces = (player) => {
         let subMarine = document.querySelector('#Submarine');
         let patrolB = document.querySelector('#Patrolboat');
         let align = carrier.getAttribute('data-alignment');
-        console.log(player);
         if (data === 'Carrier'){
             if (player.scout(x, y, 5, align) === false){
+                user.flag[0] = true;
                 if (align === 'row'){
                     player.placeHorizontal(x, y, 5, data);
                     for (let i = 0; i < 5; i++){
@@ -306,10 +299,10 @@ const placePieces = (player) => {
             else {
                 
             }
-
         }
         if (data === 'Battleship'){
             if (player.scout(x, y, 4, align) === false){
+                user.flag[1] = true;
                 if (align === 'row'){
                     player.placeHorizontal(x, y, 4, data);
                     for (let i = 0; i < 4; i++){
@@ -330,6 +323,7 @@ const placePieces = (player) => {
         }
         if (data === 'Destroyer'){
             if (player.scout(x, y, 3, align) === false){
+                user.flag[2] = true;
                 if (align === 'row'){
                     player.placeHorizontal(x, y, 3, data);
                     for (let i = 0; i < 3; i++){
@@ -350,6 +344,7 @@ const placePieces = (player) => {
         }
         if (data === 'Submarine'){
             if (player.scout(x, y, 3, align) === false){
+                user.flag[3] = true;
                 if (align === 'row'){
                     player.placeHorizontal(x, y, 3, data);
                     for (let i = 0; i < 3; i++){
@@ -370,6 +365,7 @@ const placePieces = (player) => {
         }
         if (data === 'Patrolboat'){
             if (player.scout(x, y, 2, align) === false){
+                user.flag[4] = true;
                 if (align === 'row'){
                     player.placeHorizontal(x, y, 2, data);
                     for (let i = 0; i < 2; i++){
@@ -387,6 +383,11 @@ const placePieces = (player) => {
                 }
                 patrolB.style.display = 'none';
             }
+        }
+        let flagArr = user.flag.filter(flag => flag === true);
+        if (flagArr.length === 5) {
+            const startBtn = document.querySelector('#startBtn');
+            startBtn.style.display = 'flex';
         }
     }
     let response = document.getElementsByClassName('atkDiv1');
@@ -406,16 +407,18 @@ const deRender = () => {
 }
 
 const winMsg = (string) => {
-    const gameContainer = document.querySelector('#gameContainer');
+    const btnContainer = document.querySelector('#btnContainer');
+    const winContainer = document.querySelector('#winContainer');
     const winnerDiv = document.createElement('div');
     if (string === 'Player') {
-        winnerDiv.textContent = 'You are the winner!';
+        winnerDiv.textContent = 'Enemy fleet destroyed!';
     }
     else if (string === 'Computer') {
-        winnerDiv.textContent = 'Computer is the winner!';
+        winnerDiv.textContent = 'Your fleet was destroyed!';
     }
+    btnContainer.style.display = 'none';
 
-    gameContainer.appendChild(winnerDiv);
+    winContainer.appendChild(winnerDiv);
 }
 
 export { 
