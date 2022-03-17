@@ -11,10 +11,10 @@ const start = (player1, player2) => {
     deRender();
     renderGBoard(player1.board.gameBoard, 1);
     player2.board.placeHorizontal(8, 1, 5, 'Carrier');
-    player2.board.placeHorizontal(3, 5, 4, 'Battleship');
-    player2.board.placeHorizontal(6, 3, 3, 'Destroyer');
+    player2.board.placeVert(3, 7, 4, 'Battleship');
+    player2.board.placeVert(4, 3, 3, 'Destroyer');
     player2.board.placeHorizontal(1, 1, 3, 'Submarine');
-    player2.board.placeHorizontal(0, 6, 2, 'Patrolboat');
+    player2.board.placeVert(1, 9, 2, 'Patrolboat');
     renderGBoard(player2.board.gameBoard, 2);
     gameContainer.style.gap = '17%';
     container2.style.display = 'flex';
