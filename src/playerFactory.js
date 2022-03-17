@@ -3,6 +3,18 @@ import { shipFactory } from './shipFactory';
 
 const Player = (name, isActive = false) => {
 
+    let pos5 = 0;
+    let pos4 = 0;
+    let pos3 = 0;
+    let pos2 = 0;
+    let pos1 = 0;
+
+    let flag1 = false;
+    let flag2 = false;
+    let flag3 = false;
+    let flag4 = false;
+    let flag5 = false;
+
     let carrier = shipFactory(5);
     let battleship = shipFactory(4);
     let destroyer = shipFactory(3);
@@ -13,7 +25,6 @@ const Player = (name, isActive = false) => {
         name,
         isActive,
     }
-
     let board = gameBoardFactory();
 
     let ships = [carrier, battleship, destroyer, submarine, patrolBoat];
@@ -24,16 +35,7 @@ const Player = (name, isActive = false) => {
 
         return [x, y];
     }
-    let pos5 = 0;
-    let pos4 = 0;
-    let pos3 = 0;
-    let pos2 = 0;
-    let pos1 = 0;
-    let flag1 = false;
-    let flag2 = false;
-    let flag3 = false;
-    let flag4 = false;
-    let flag5 = false;
+    let pos = [pos5, pos4, pos3, pos2, pos1];
 
     let flag = [flag1, flag2, flag3, flag4, flag5];
 
@@ -44,11 +46,7 @@ const Player = (name, isActive = false) => {
         board,
         ships,
         enemyMove,
-        pos5,
-        pos4,
-        pos3,
-        pos2,
-        pos1,
+        pos,
         flag,
     }
 };

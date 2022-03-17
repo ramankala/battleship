@@ -1,20 +1,18 @@
 import { Player } from './playerFactory';
-import { renderGBoard, atkListener, placePieces, deRender } from './render';
+import { renderGBoard, placePieces } from './render';
+import { atkListener } from './attacks';
+import { start, align, onDragStart } from './eventListeners';
 
 const game = () => {
 
     const startBtn = document.querySelector('#startBtn');
     const alignBtn = document.querySelector('#alignBtn');
+    const resetBtn = document.querySelector('#resetBtn');
     const carrierDrag = document.querySelector('#Carrier');
     const battleDrag = document.querySelector('#Battleship');
     const destrDrag = document.querySelector('#Destroyer');
     const subDrag = document.querySelector('#Submarine');
     const patrolDrag = document.querySelector('#Patrolboat');
-    carrierDrag.classList.add('horizontal');
-    battleDrag.classList.add('horizontal');
-    destrDrag.classList.add('horizontal');
-    subDrag.classList.add('horizontal');
-    patrolDrag.classList.add('horizontal');
     carrierDrag.style.flexDirection = 'row';
     carrierDrag.setAttribute('data-alignment', 'row');
 
@@ -22,11 +20,6 @@ const game = () => {
         Player("player1", true),
         Player("computer", false)
     ];
-
-    const onDragStart = (e) => {
-        e.dataTransfer.setData('text/plain', e.target.id);
-        e.currentTarget.style.backgroundColor = 'green';
-    }
 
     carrierDrag.addEventListener('dragstart', onDragStart);
     battleDrag.addEventListener('dragstart', onDragStart);
@@ -36,48 +29,18 @@ const game = () => {
 
     renderGBoard(playerArr[0].board.gameBoard, 1);
 
-    alignBtn.addEventListener('click', function(){
-        if (carrierDrag.style.flexDirection === 'row'){
-            carrierDrag.style.flexDirection = 'column';
-            battleDrag.style.flexDirection = 'column';
-            destrDrag.style.flexDirection = 'column';
-            subDrag.style.flexDirection = 'column';
-            patrolDrag.style.flexDirection = 'column';
-            carrierDrag.setAttribute('data-alignment', 'column');
-        } else {
-            carrierDrag.style.flexDirection = 'row';
-            battleDrag.style.flexDirection = 'row';
-            destrDrag.style.flexDirection = 'row';
-            subDrag.style.flexDirection = 'row';
-            patrolDrag.style.flexDirection = 'row';
-            carrierDrag.setAttribute('data-alignment', 'row');
-        }
-
-    })
+    alignBtn.addEventListener('click', align);
 
     placePieces(playerArr[0]);
 
     startBtn.addEventListener('click', function(){
-        const gameContainer = document.querySelector('#gameContainer');
-        const container2 = document.querySelector('#container2');
-        const gamerTag = document.querySelector('#gamerTag');
-        const computerTag = document.querySelector('#computerTag');
-        deRender();
-        renderGBoard(playerArr[0].board.gameBoard, 1);
-        playerArr[1].board.placeHorizontal(8, 1, 5, 'Carrier');
-        playerArr[1].board.placeHorizontal(3, 5, 4, 'Battleship');
-        playerArr[1].board.placeHorizontal(6, 3, 3, 'Destroyer');
-        playerArr[1].board.placeHorizontal(1, 1, 3, 'Submarine');
-        playerArr[1].board.placeHorizontal(0, 6, 2, 'Patrolboat');
-        renderGBoard(playerArr[1].board.gameBoard, 2);
-        gameContainer.style.gap = '17%';
-        container2.style.display = 'flex';
-        gamerTag.style.gap = '10%';
-        computerTag.style.display = 'flex';
-        startBtn.style.display = 'none';
-        alignBtn.style.display = 'none';
+        start(playerArr[0], playerArr[1]);
         atkListener(playerArr[0], playerArr[1], 2);
     });
+
+    resetBtn.addEventListener('click', function(){
+        window.location.reload();
+    })
 
 };
 
