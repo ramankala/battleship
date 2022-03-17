@@ -22,3 +22,4 @@ CLICK on spaces on your opponents board to try and attack their ships.  hits are
 
 <h2>Live Demo</h2>
 
+https://ramankala.github.io/battleship/
